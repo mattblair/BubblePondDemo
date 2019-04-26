@@ -8,24 +8,28 @@ PODS:
   - CocoaLumberjack/Core (3.5.2)
   - CocoaLumberjack/Swift (3.5.2):
     - CocoaLumberjack/Core
+  - MusicTheorySwift (1.2.1)
   - SwiftLint (0.31.0)
 
 DEPENDENCIES:
   - AudioKit (~> 4.7)
   - CocoaLumberjack/Swift
+  - MusicTheorySwift
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AudioKit
     - CocoaLumberjack
+    - MusicTheorySwift
     - SwiftLint
 
 SPEC CHECKSUMS:
   AudioKit: fb42378fbe950033462b47efe3643c108698ba03
   CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
+  MusicTheorySwift: 0c2c9896d00674ca600891dde47890a5dfe4a37e
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: d8f1fe55e4f8ca21c55550bc68bf42bad2e9603d
+PODFILE CHECKSUM: 824e24b99bda964592c418727d109c7ac5b3b77e
 
 COCOAPODS: 1.5.2

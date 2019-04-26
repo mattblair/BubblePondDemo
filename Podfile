@@ -8,6 +8,7 @@ target 'BubblePond' do
 
   # Pods for BubblePond
   pod 'AudioKit', '~> 4.7'
+  pod 'MusicTheorySwift'
   pod 'SwiftLint'
   pod 'CocoaLumberjack/Swift'
 
