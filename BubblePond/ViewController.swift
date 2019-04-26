@@ -18,8 +18,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: pass in config and orch here? Or is that managed internally?
-        scene = BubblePondScene.init(size: view.bounds.size)
+        scene = BubblePondScene.init(size: view.bounds.size,
+                                     scoreName: "bpscore-example")
         
         scene?.scaleMode = .resizeFill
         

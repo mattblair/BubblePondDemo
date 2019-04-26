@@ -1,0 +1,32 @@
+{
+    "name": "Example",
+    
+    "fadeInEnvelope" : {
+        "attackDuration": 0.7,
+        "decayDuration": 0.3,
+        "sustainLevel": 0.3,
+        "releaseDuration": 0.1
+    },
+    
+    "fadeOutEnvelope" : {
+        "attackDuration": 0.3,
+        "decayDuration": 0.4,
+        "sustainLevel": 0.3,
+        "releaseDuration": 0.5
+    },
+    
+    "fadeInNoteNames": ["B4", "F#3", "D#4", "B3"],
+    "collision1NoteNames": ["A3", "E4", "B4", "F#5", "G#5"],
+    "collision2NoteNames": [""],
+    "fadeOutNoteNames": ["E3", "E4", "E2"],
+    
+    "imageNames": [""],
+    
+    "tempo": 37.0,
+    
+    "minBubbleCount": 4,
+    "maxBubbleCount": 10,
+    
+    "minBubbleAge": 12,
+    "maxBubbleAge": 30
+}

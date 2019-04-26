@@ -8,14 +8,23 @@
 
 import SpriteKit
 
+
+extension Notification.Name {
+    
+    static let BubbleWillFade = NSNotification.Name("BubbleWillFade")
+}
+
+
 class BubbleNode: SKSpriteNode {
+    
+    static let noteNameKey: String = "NoteNameKey"
     
     let noteName: String
     
     // have this vary over time and determine alpha/amplitude?
     var vitality: Float = 0.0
     var isMortal: Bool = true
-    var lifeDuration: Int = Int.random(in: 10...15)
+    var lifeDuration: Int
     var lastSounded: Date?
     
     // Additional properties to consider:
@@ -24,9 +33,10 @@ class BubbleNode: SKSpriteNode {
     // duration before fade
     
     
-    init(noteName note: String, diameter: CGFloat) {
+    init(noteName note: String, diameter: CGFloat, duration: Int) {
         
         noteName = note
+        lifeDuration = duration
         
         // Use these to start
         let imageName = "sk180313-dot-\(Int.random(in: 1...7))"
@@ -52,15 +62,27 @@ class BubbleNode: SKSpriteNode {
     
     // TODO: configures physics internally?
     
-    public func age(by duration: Int = 1) {
+    func age(by duration: Int = 1) {
         
         guard isMortal else { return }
         
         lifeDuration -= duration
         
         if lifeDuration < 1 {
-            run(SKAction.sequence([SKAction.fadeOut(withDuration: 2.0),
-                                   SKAction.removeFromParent()]))
+            fadeAway()
         }
+    }
+    
+    private func fadeAway() {
+        
+        run(SKAction.sequence([SKAction.fadeOut(withDuration: 2.0),
+                               SKAction.removeFromParent()]))
+        
+        NotificationCenter.default.post(name: .BubbleWillFade,
+                                        object: self,
+                                        userInfo: [ BubbleNode.noteNameKey: noteName ])
+        
+        NotificationCenter.default.post(name: .BubbleWillFade,
+                                        object: self)
     }
 }
