@@ -361,6 +361,6 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         // TODO: Or have it fade itself in?
         bubble.run(SKAction.fadeIn(withDuration: 2.0))
         
-        orchestra.playNextFadeInNote()
+        orchestra.playNextArrivalNote()
     }
 }

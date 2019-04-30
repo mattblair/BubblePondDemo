@@ -21,19 +21,19 @@ class PondOrchestra {
     var score: BubblePondScore
     
     // TODO: make sure these values are reset when score changes
-    var fadeInNoteIndex = 0
-    var fadeOutNoteIndex = 0
+    var arrivalNoteIndex = 0
+    var departureNoteIndex = 0
     
-    let fadeInFM = AKFMOscillatorBank()
-    let fadeOutFM = AKFMOscillatorBank()
+    let arrivalFM = AKFMOscillatorBank()
+    let departureFM = AKFMOscillatorBank()
     
     let collisionBells = AKTubularBells()
     let collisionRhodes = AKRhodesPiano()
     
     // DEPRECATED?
-    var activeFadeInNotes = [MIDINoteNumber]()
+    var activeArrivalNotes = [MIDINoteNumber]()
     var activeCollisionNotes = [MIDINoteNumber]()
-    var activeFadeOutNotes = [MIDINoteNumber]()
+    var activeDepartureNotes = [MIDINoteNumber]()
     
     var mainMixer: AKMixer
     var booster: AKBooster
@@ -58,7 +58,7 @@ class PondOrchestra {
             AKLog("Could not set session category.")
         }
         
-        mainMixer = AKMixer(fadeInFM, fadeOutFM, collisionBells, collisionRhodes)
+        mainMixer = AKMixer(arrivalFM, departureFM, collisionBells, collisionRhodes)
         
         mainMixer.volume = 0.8
         
@@ -82,7 +82,7 @@ class PondOrchestra {
         }
         
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleFadeOut),
+                                               selector: #selector(handleDeparture),
                                                name: .BubbleWillFade,
                                                object: nil)
         
@@ -135,17 +135,17 @@ class PondOrchestra {
     
     // MARK: - Playback
     
-    func nextFadeInNoteName() -> String {
+    func nextArrivalNoteName() -> String {
         
-        if fadeInNoteIndex >= score.fadeInNoteNames.count {
-            fadeInNoteIndex = 0
+        if arrivalNoteIndex >= score.arrivalNoteNames.count {
+            arrivalNoteIndex = 0
         }
         
-        let noteName = score.fadeInNoteNames[fadeInNoteIndex]
+        let noteName = score.arrivalNoteNames[arrivalNoteIndex]
         
         print("Fading in with \(noteName)")
         
-        fadeInNoteIndex += 1
+        arrivalNoteIndex += 1
         
         return noteName
     }
@@ -164,7 +164,7 @@ class PondOrchestra {
     }
     
     // DEPRECATED
-    func playFadeIn(note noteName: String) {
+    func playArrival(note noteName: String) {
         
         print("Playing fade in at \(noteName)")
         
@@ -175,32 +175,32 @@ class PondOrchestra {
         //fadeInSampler.play(noteNumber: midiNumber,
         //                   velocity: velocity)
         
-        activeFadeInNotes.append(midiNumber)
-        print("Fade in notes: \(activeFadeInNotes)")
-        fadeInFM.play(noteNumber: midiNumber, velocity: velocity)
+        activeArrivalNotes.append(midiNumber)
+        print("Arrival notes: \(activeArrivalNotes)")
+        arrivalFM.play(noteNumber: midiNumber, velocity: velocity)
         
         // Schedule stopping point -- track notes outside closure?
         // different qos?
         //DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, qos: .userInteractive, flags: []) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            if let activeNotes = self?.activeFadeInNotes,
+            if let activeNotes = self?.activeArrivalNotes,
                 activeNotes.count > 0,
-                let noteNumber = self?.activeFadeInNotes.removeFirst() {
+                let noteNumber = self?.activeArrivalNotes.removeFirst() {
                 
                 print("Active fade in notes before stopping: \(activeNotes)")
                 print("Now stopping: \(noteNumber)")
-                self?.fadeInFM.stop(noteNumber: noteNumber)
+                self?.arrivalFM.stop(noteNumber: noteNumber)
             } else {
                 print("Failure to find note for stopping process")
             }
         }
     }
     
-    func playNextFadeInNote() {
+    func playNextArrivalNote() {
         
-        //playFadeIn(note: nextFadeInNoteName())
-        playFM(synth: fadeInFM,
-               noteName: nextFadeInNoteName(),
+        //playFadeIn(note: nextArrivalNoteName())
+        playFM(synth: arrivalFM,
+               noteName: nextArrivalNoteName(),
                velocity: UInt8(Int.random(in: 20...120)),
                duration: 1.0)
     }
@@ -221,23 +221,23 @@ class PondOrchestra {
         }
     }
     
-    func nextFadeOutNoteName() -> String {
+    func nextDepartureNoteName() -> String {
         
-        if fadeOutNoteIndex >= score.fadeOutNoteNames.count {
-            fadeOutNoteIndex = 0
+        if departureNoteIndex >= score.departureNoteNames.count {
+            departureNoteIndex = 0
         }
         
-        let noteName = score.fadeInNoteNames[fadeOutNoteIndex]
+        let noteName = score.departureNoteNames[departureNoteIndex]
         
         print("Fading out with \(noteName)")
         
-        fadeOutNoteIndex += 1
+        departureNoteIndex += 1
         
         return noteName
     }
     
     @objc
-    private func handleFadeOut(note: Notification) {
+    private func handleDeparture(note: Notification) {
         
         // Use this if you need to extract fade out note from notification:
         /*
@@ -246,8 +246,8 @@ class PondOrchestra {
         }
         */
         
-        playFM(synth: fadeOutFM,
-               noteName: nextFadeOutNoteName(),
+        playFM(synth: departureFM,
+               noteName: nextDepartureNoteName(),
                velocity: UInt8(Int.random(in: 20...120)),
                duration: 1.2)
     }

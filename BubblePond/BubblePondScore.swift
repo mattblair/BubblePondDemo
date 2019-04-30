@@ -14,19 +14,19 @@ struct BubblePondScore: Codable {
     
     let name: String
     
+    let arrivalEnvelope: AmplitudeEnvelope
     
     // TODO: FM configurations for fade in and fade out synths
-    let fadeInEnvelope: AmplitudeEnvelope
-    let fadeOutEnvelope: AmplitudeEnvelope
+    let departureEnvelope: AmplitudeEnvelope
     
     // TODO: any configuration for collision sounds
     
     // different pitch set for each audio event type
     
-    let fadeInNoteNames: [String]
+    let arrivalNoteNames: [String]
     let collision1NoteNames: [String]
     let collision2NoteNames: [String]
-    let fadeOutNoteNames: [String]
+    let departureNoteNames: [String]
     
     // TODO: ground hum params
     
