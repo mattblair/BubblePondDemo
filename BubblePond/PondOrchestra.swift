@@ -128,8 +128,11 @@ class PondOrchestra {
         fadeInFM.carrierMultiplier = 2.0
         fadeInFM.configure(envelope: score.fadeInEnvelope)
         
-        fadeOutFM.carrierMultiplier = 1.0
-        fadeOutFM.configure(envelope: score.fadeOutEnvelope)
+        arrivalFM.configure(properties: score.arrivalSynthProperties)
+        arrivalFM.configure(envelope: score.arrivalEnvelope)
+        
+        departureFM.configure(properties: score.departureSynthProperties)
+        departureFM.configure(envelope: score.departureEnvelope)
     }
     
     

@@ -1,24 +1,38 @@
 {
     "name": "Example",
     
-    "fadeInEnvelope" : {
+    "arrivalSynthProperties" : {
+        "carrierMultiplier": 2.0,
+        "modulatingMultiplier": 1.0,
+        "modulationIndex": 1.0,
+        "vibratoDepth": 0.0,
+        "vibratoRate": 0.0
+    },
+    "arrivalEnvelope" : {
         "attackDuration": 0.7,
         "decayDuration": 0.3,
         "sustainLevel": 0.3,
         "releaseDuration": 0.1
     },
     
-    "fadeOutEnvelope" : {
+    "departureSynthProperties" : {
+        "carrierMultiplier": 1.0,
+        "modulatingMultiplier": 1.0,
+        "modulationIndex": 1.0,
+        "vibratoDepth": 0.0,
+        "vibratoRate": 0.0
+    },
+    "departureEnvelope" : {
         "attackDuration": 0.3,
         "decayDuration": 0.4,
         "sustainLevel": 0.3,
         "releaseDuration": 0.5
     },
     
-    "fadeInNoteNames": ["B4", "F#3", "D#4", "B3"],
+    "arrivalNoteNames": ["B4", "F#3", "D#4", "B3"],
     "collision1NoteNames": ["A3", "E4", "B4", "F#5", "G#5"],
     "collision2NoteNames": [""],
-    "fadeOutNoteNames": ["E3", "E4", "E2"],
+    "departureNoteNames": ["E3", "E4", "E2"],
     
     "imageNames": [""],
     
