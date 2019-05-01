@@ -9,7 +9,7 @@
 import AudioKit
 import MusicTheorySwift
 
-
+// DEPRECATED
 enum SamplerError: Error {
     case fileNotFound
     case fileNotReadable
@@ -120,13 +120,17 @@ class PondOrchestra {
     
     // MARK: - Configure Sound Sources
     
-    // TODO: Call this after score changes
+    // TODO: Call this every time the score changes
     func configureFMSynths() {
         
-        // TODO: load synth config from score
+        // all of these values default to 1.0
+        print("cm: \(arrivalFM.carrierMultiplier)")
+        print("mm: \(arrivalFM.modulatingMultiplier)")
+        print("mi: \(arrivalFM.modulationIndex)")
         
-        fadeInFM.carrierMultiplier = 2.0
-        fadeInFM.configure(envelope: score.fadeInEnvelope)
+        // both of these default to 0.0
+        print("vd: \(arrivalFM.vibratoDepth)")
+        print("vr: \(arrivalFM.vibratoRate)")
         
         arrivalFM.configure(properties: score.arrivalSynthProperties)
         arrivalFM.configure(envelope: score.arrivalEnvelope)
@@ -170,39 +174,6 @@ class PondOrchestra {
         }
     }
     
-    // DEPRECATED
-    func playArrival(note noteName: String) {
-        
-        print("Playing fade in at \(noteName)")
-        
-        // name this as noteNumber?
-        let midiNumber = MIDINoteNumber(Pitch(stringLiteral: noteName).rawValue)
-        let velocity: MIDIVelocity = UInt8(Int.random(in: 20...120))
-        
-        //fadeInSampler.play(noteNumber: midiNumber,
-        //                   velocity: velocity)
-        
-        activeArrivalNotes.append(midiNumber)
-        print("Arrival notes: \(activeArrivalNotes)")
-        arrivalFM.play(noteNumber: midiNumber, velocity: velocity)
-        
-        // Schedule stopping point -- track notes outside closure?
-        // different qos?
-        //DispatchQueue.main.asyncAfter(deadline: .now() + 2.0, qos: .userInteractive, flags: []) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            if let activeNotes = self?.activeArrivalNotes,
-                activeNotes.count > 0,
-                let noteNumber = self?.activeArrivalNotes.removeFirst() {
-                
-                print("Active fade in notes before stopping: \(activeNotes)")
-                print("Now stopping: \(noteNumber)")
-                self?.arrivalFM.stop(noteNumber: noteNumber)
-            } else {
-                print("Failure to find note for stopping process")
-            }
-        }
-    }
-    
     func playNextArrivalNote() {
         
         //playFadeIn(note: nextArrivalNoteName())
@@ -211,7 +182,6 @@ class PondOrchestra {
                velocity: score.randomArrivalVelocity(),
                duration: 1.0)
     }
-    
     
     func playCollisionBetween(note1: String, note2: String) {
         

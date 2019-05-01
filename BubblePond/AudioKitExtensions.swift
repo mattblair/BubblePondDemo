@@ -34,7 +34,6 @@ struct AmplitudeEnvelope: Codable {
 }
 
 
-
 extension AKFMOscillatorBank {
     
     func configure(properties: FMSynthProperties) {

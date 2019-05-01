@@ -30,7 +30,6 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
     private var framesPerSoundEvent = 60
     
     
-    //init(size: CGSize, conf: SoundPond1Config, orch: SoundPondOrchestra) {
     init?(size: CGSize, scoreName: String) {
         
         if let bpScore = BubblePondScene.loadScore(filename: scoreName) {
@@ -71,9 +70,6 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         
         print("Screen dimensions: \(view.frame.size)")
         print("Scene dimensions: \(self.frame.size)")
-        
-        // TODO: Is this the right place for this?
-        //orchestra.loadCurrentSamples()
     }
     
     
@@ -83,14 +79,13 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         
         frameCount += 1
         
-        // Assumed frame rate is 60 fps
+        // Assumption: frame rate is 60 fps
         if frameCount % 60 == 0 {
             
             let bubbles = children.compactMap { $0 as? BubbleNode }
             for bubble in bubbles { bubble.age() }
         }
         
-        // TODO: read this from score
         if frameCount % framesPerSoundEvent == 0 {
             // original:
             //    if let point = emptyPositionOnScreen() {
@@ -152,7 +147,7 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
     
     static func loadScore(filename: String) -> BubblePondScore? {
         
-        // TODO: change score names to .bpscore
+        // TODO: change score extensions to .bpscore
         if let scorePath = Bundle.main.path(forResource: filename,
                                             ofType: "json") {
             
@@ -169,11 +164,11 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
                     print("Failed convert scoreJSONString to data.")
                 }
             } catch {
-                print("Failed to parse playlist: \(error)")
+                print("Failed to parse \(filename): \(error)")
             }
             
         } else {
-            print("Couldn't find playlist json file")
+            print("Couldn't find score json file: \(filename)")
         }
         return nil
     }
@@ -260,14 +255,13 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         return bubblesWithin
     }
     
-    // TODO: limit the number of iterations, making return value optional, or a Result?
     func emptyPositionOnScreen() -> Result<CGPoint, PondError> {
         
         var point: CGPoint = .zero
         var positionIsEmpty: Bool = false
         
         var attempts = 0
-        let maxAttempts = 10
+        let maxAttempts = 40
         
         while !positionIsEmpty {
             
@@ -295,7 +289,6 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        // TODO: return earlier?
         return .success(point)
     }
     
@@ -310,7 +303,7 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         
         // check min here,too?
         
-        // TODO: return false if there is no empty space?
+        // TODO: return false here if there is no empty space?
         
         return true
     }
@@ -319,16 +312,11 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         
         guard shouldAddBubble() else { return }
         
-        // pull this from score
-        //let bubble = BubbleNode(noteName: noteNames.randomElement() ?? "C4",
         let bubble = BubbleNode(noteName: score.randomCollisionNoteName(),
                                 diameter: bubbleDiameter(factor: randomScreenFraction()),
                                 duration: score.randomLifeDuration())
         bubble.position = point
         bubble.alpha = 0.0 // move inside BubbleNode if it handles its own fade
-        
-        // TODO: configure lifeDuration and action sequence here?
-        // Or inside node?
         
         self.addChild(bubble)
         
@@ -337,7 +325,7 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         //let physicsRadius = max(n.frame.size.width / 2, n.frame.size.height / 2) * 0.8
         
         // TODO: Turn this into an instance method on node
-        let physicsRadius = max(bubble.frame.size.width / 2, bubble.frame.size.height / 2) * 0.8
+        let physicsRadius = max(bubble.frame.size.width / 2, bubble.frame.size.height / 2) * 0.9
         bubble.physicsBody = SKPhysicsBody(circleOfRadius: physicsRadius)
         
         //bubble.physicsBody?.velocity = randomVector(deviatingBy: visualConfig.maxInitialVelocity)
