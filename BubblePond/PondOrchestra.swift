@@ -204,7 +204,7 @@ class PondOrchestra {
         //playFadeIn(note: nextArrivalNoteName())
         playFM(synth: arrivalFM,
                noteName: nextArrivalNoteName(),
-               velocity: UInt8(Int.random(in: 20...120)),
+               velocity: score.randomArrivalVelocity(),
                duration: 1.0)
     }
     
@@ -251,7 +251,7 @@ class PondOrchestra {
         
         playFM(synth: departureFM,
                noteName: nextDepartureNoteName(),
-               velocity: UInt8(Int.random(in: 20...120)),
+               velocity: score.randomDepartureVelocity(),
                duration: 1.2)
     }
 }
