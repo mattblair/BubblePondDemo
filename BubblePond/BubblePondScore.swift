@@ -16,9 +16,13 @@ struct BubblePondScore: Codable {
     
     let arrivalSynthProperties: FMSynthProperties
     let arrivalEnvelope: AmplitudeEnvelope
+    let arrivalMinVelocity: Int
+    let arrivalMaxVelocity: Int
     
     let departureSynthProperties: FMSynthProperties
     let departureEnvelope: AmplitudeEnvelope
+    let departureMinVelocity: Int
+    let departureMaxVelocity: Int
     
     // TODO: any configuration for collision sounds
     
@@ -48,6 +52,14 @@ struct BubblePondScore: Codable {
     
     func randomLifeDuration() -> Int {
         return Int.random(in: minBubbleAge...maxBubbleAge)
+    }
+    
+    func randomArrivalVelocity() -> UInt8 {
+        return UInt8(Int.random(in: arrivalMinVelocity...arrivalMaxVelocity))
+    }
+    
+    func randomDepartureVelocity() -> UInt8 {
+        return UInt8(Int.random(in: departureMinVelocity...departureMaxVelocity))
     }
     
     func randomCollisionNoteName() -> String {
