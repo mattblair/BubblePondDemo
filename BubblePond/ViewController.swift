@@ -18,8 +18,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let scoreName = "bpscore2" // "bpscore-example"
+        
         scene = BubblePondScene.init(size: view.bounds.size,
-                                     scoreName: "bpscore-example")
+                                     scoreName: scoreName)
         
         scene?.scaleMode = .resizeFill
         

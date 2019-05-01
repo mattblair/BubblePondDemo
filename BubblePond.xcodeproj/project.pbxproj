@@ -10,6 +10,7 @@
 		26C7754649860E992198A0C8 /* Pods_BubblePondUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F2346CF3B82F79ABDD3CE5A /* Pods_BubblePondUITests.framework */; };
 		3F048455700FBD69E7D7B2D2 /* Pods_BubblePond.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B903AFA7A96790F5B6A773D /* Pods_BubblePond.framework */; };
 		9AC156CA064534B9C7DD08EA /* Pods_BubblePondTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0B9CB9E3D80663CB04E0121 /* Pods_BubblePondTests.framework */; };
+		C9089B262277CD1600D0C3F0 /* bpscore2.json in Resources */ = {isa = PBXBuildFile; fileRef = C9089B252277CD1600D0C3F0 /* bpscore2.json */; };
 		C98D8908226E8FE200A2E329 /* PondOrchestra.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98D8907226E8FE200A2E329 /* PondOrchestra.swift */; };
 		C9963818226A7C3900BF6454 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9963817226A7C3900BF6454 /* AppDelegate.swift */; };
 		C996381A226A7C3900BF6454 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9963819226A7C3900BF6454 /* ViewController.swift */; };
@@ -51,6 +52,7 @@
 		A1917342049543011D748A7F /* Pods-BubblePondTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblePondTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BubblePondTests/Pods-BubblePondTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A50503546F1472E882C28B15 /* Pods-BubblePond.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblePond.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BubblePond/Pods-BubblePond.debug.xcconfig"; sourceTree = "<group>"; };
 		A86E672BE63FC560480F96BA /* Pods-BubblePondUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BubblePondUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BubblePondUITests/Pods-BubblePondUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C9089B252277CD1600D0C3F0 /* bpscore2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bpscore2.json; sourceTree = "<group>"; };
 		C98D8907226E8FE200A2E329 /* PondOrchestra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PondOrchestra.swift; sourceTree = "<group>"; };
 		C9963814226A7C3900BF6454 /* BubblePond.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubblePond.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9963817226A7C3900BF6454 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				C99FA56822737BA00041FB29 /* bpscore-example.json */,
+				C9089B252277CD1600D0C3F0 /* bpscore2.json */,
 			);
 			path = Scores;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				C9963822226A7C3D00BF6454 /* LaunchScreen.storyboard in Resources */,
 				C996381F226A7C3D00BF6454 /* Assets.xcassets in Resources */,
 				C996381D226A7C3900BF6454 /* Main.storyboard in Resources */,
+				C9089B262277CD1600D0C3F0 /* bpscore2.json in Resources */,
 				C99FA56922737BA00041FB29 /* bpscore-example.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

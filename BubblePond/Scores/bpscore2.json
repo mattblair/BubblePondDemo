@@ -1,0 +1,51 @@
+{
+    "name": "BP Score #2",
+    
+    "arrivalSynthProperties" : {
+        "carrierMultiplier": 1.0,
+        "modulatingMultiplier": 2.0,
+        "modulationIndex": 3.0,
+        "vibratoDepth": 0.0,
+        "vibratoRate": 0.0
+    },
+    "arrivalEnvelope" : {
+        "attackDuration": 0.7,
+        "decayDuration": 0.3,
+        "sustainLevel": 0.3,
+        "releaseDuration": 0.1
+    },
+    "arrivalMinVelocity": 50,
+    "arrivalMaxVelocity": 110,
+    
+    "departureSynthProperties" : {
+        "carrierMultiplier": 1.0,
+        "modulatingMultiplier": 4.0,
+        "modulationIndex": 2.0,
+        "vibratoDepth": 0.1,
+        "vibratoRate": 0.2
+    },
+    "departureEnvelope" : {
+        "attackDuration": 0.7,
+        "decayDuration": 0.4,
+        "sustainLevel": 0.2,
+        "releaseDuration": 0.5
+    },
+    "departureMinVelocity": 20,
+    "departureMaxVelocity": 60,
+    
+    "arrivalNoteNames": ["e3", "d3", "c#3", "b2"],
+    "collision1NoteNames": ["D3", "A3", "E4", "B4", "F#5", "G#5"],
+    "collision2NoteNames": [""],
+    "departureNoteNames": ["B4", "F#3", "D#4", "B3", "E3"],
+    
+    "imageNames": [""],
+    
+    "tempo": 32.0,
+    
+    "minBubbleCount": 4,
+    "maxBubbleCount": 10,
+    
+    "minBubbleAge": 12,
+    "maxBubbleAge": 30
+}
+
