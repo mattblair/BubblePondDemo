@@ -146,7 +146,7 @@ class PondOrchestra {
         
         let noteName = score.arrivalNoteNames[arrivalNoteIndex]
         
-        print("Fading in with \(noteName)")
+        print("Arriving with \(noteName)")
         
         arrivalNoteIndex += 1
         
@@ -155,7 +155,11 @@ class PondOrchestra {
     
     func playFM(synth: AKFMOscillatorBank, noteName: String, velocity: MIDIVelocity, duration: TimeInterval) {
         
-        let noteNumber = MIDINoteNumber(Pitch(stringLiteral: noteName).rawValue)
+        // Temporary fix for conversion from uppercase notenames
+        let pitch = Pitch(stringLiteral: noteName.lowercased())
+        print("Pitch is \(pitch)")
+        let noteNumber = MIDINoteNumber(pitch.rawValue)
+        print("Playing \(noteName) (\(noteNumber)) @ velocity \(velocity)")
         synth.play(noteNumber: noteNumber, velocity: velocity)
         
         // TODO: specify different qos?
@@ -211,8 +215,9 @@ class PondOrchestra {
     
     func playCollisionBetween(note1: String, note2: String) {
         
-        let note1Number = MIDINoteNumber(Pitch(stringLiteral: note1).rawValue)
-        let note2Number = MIDINoteNumber(Pitch(stringLiteral: note2).rawValue)
+        // TODO: convenience method to make this less ugly...
+        let note1Number = MIDINoteNumber(Pitch(stringLiteral: note1.lowercased()).rawValue)
+        let note2Number = MIDINoteNumber(Pitch(stringLiteral: note2.lowercased()).rawValue)
         
         collisionBells.trigger(frequency: note1Number.midiNoteToFrequency(),
                                amplitude: Double.random(in: 0.2...0.6))
@@ -232,7 +237,7 @@ class PondOrchestra {
         
         let noteName = score.departureNoteNames[departureNoteIndex]
         
-        print("Fading out with \(noteName)")
+        print("Departing with \(noteName)")
         
         departureNoteIndex += 1
         
