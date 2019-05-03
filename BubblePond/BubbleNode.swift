@@ -40,7 +40,7 @@ class BubbleNode: SKSpriteNode {
         noteName = note
         lifeDuration = duration
         
-        // Use these to start
+        // TODO: Read these from the score, or add as init parameter
         let imageName = "sk180313-dot-\(Int.random(in: 1...7))"
         
         // make this initializer failable based on success of this?
@@ -61,7 +61,14 @@ class BubbleNode: SKSpriteNode {
         fatalError("init(coder:) has not been implemented for BubbleNode")
     }
     
+    
+    // MARK: - Physics
+    
     // TODO: configures physics internally?
+    
+    func physicsRadius(multiplier: Float) -> CGFloat {
+        return max(frame.size.width / 2, frame.size.height / 2) * CGFloat(multiplier)
+    }
     
     
     // MARK: - Lifecycle

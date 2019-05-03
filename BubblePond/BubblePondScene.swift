@@ -177,18 +177,19 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Adding New Bubbles
     
     // TODO: derive from score
+    /*
     func screenFactor() -> ClosedRange<Float> {
         return 3.0...4.0
     }
-    
+    */
     func randomScreenFraction() -> CGFloat {
         
-        return CGFloat(Float.random(in: screenFactor()))
+        return CGFloat(Float.random(in: score.screenDivisorRange))
     }
     
     func maxBubbleDiameter() -> CGFloat {
         
-        return bubbleDiameter(factor: CGFloat(screenFactor().lowerBound))
+        return bubbleDiameter(factor: CGFloat(score.screenDivisorRange.lowerBound))
     }
     
     /// Calculated as a portion of the smallest screen edge.
@@ -199,11 +200,7 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         // swiftlint:disable:next identifier_name
         if let s = scene {
             
-            // TODO: read divisor from score
-            // TODO: randomize here? Or in the bubble?
-            
             let smallestDimension = min(s.frame.size.width, s.frame.size.height)
-            //let divisor = CGFloat(Float.random(in: screenFactorRange))
             return floor(smallestDimension / divisor)
         }
         
@@ -297,11 +294,11 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         let bubbles = children.compactMap { $0 as? BubbleNode }
         print("Bubble count: \(bubbles.count)")
         
-        if bubbles.count >= score.maxBubbleCount {
+        if bubbles.count >= score.bubbleCountRange.upperBound {
             return false
         }
         
-        // check min here,too?
+        // check lowerBound here,too?
         
         // TODO: return false here if there is no empty space?
         
@@ -322,20 +319,18 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         
         // TODO: Did you do physics here because it has to be part of a scene first?
         
-        //let physicsRadius = max(n.frame.size.width / 2, n.frame.size.height / 2) * 0.8
-        
-        // TODO: Turn this into an instance method on node
-        let physicsRadius = max(bubble.frame.size.width / 2, bubble.frame.size.height / 2) * 0.9
+        let physicsRadius = bubble.physicsRadius(multiplier: score.physicsRadiusMultiplier)
         bubble.physicsBody = SKPhysicsBody(circleOfRadius: physicsRadius)
         
-        //bubble.physicsBody?.velocity = randomVector(deviatingBy: visualConfig.maxInitialVelocity)
-        
+        /*
         let dx = Float.random(in: -20.0...20.0)
         let dy = Float.random(in: -20.0...20.0)
         print("Initial vector: \(dx), \(dy)")
         
         bubble.physicsBody?.velocity = CGVector(dx: CGFloat(dx),
                                                 dy: CGFloat(dy))
+        */
+        bubble.physicsBody?.velocity = score.randomInitialVelocity()
         
         print("Bubble density: \(bubble.physicsBody?.density ?? 0.0)")
         print("Bubble default mass: \(bubble.physicsBody?.mass ?? 0.0)")

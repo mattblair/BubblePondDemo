@@ -14,8 +14,8 @@
         "sustainLevel": 0.3,
         "releaseDuration": 0.1
     },
-    "arrivalMinVelocity": 110,
-    "arrivalMaxVelocity": 50,
+    "arrivalVelocityRange": [50, 110],
+    "arrivalDurationRange": [0.9, 1.1],
     
     "departureSynthProperties" : {
         "carrierMultiplier": 1.0,
@@ -30,21 +30,25 @@
         "sustainLevel": 0.3,
         "releaseDuration": 0.5
     },
-    "departureMinVelocity": 90,
-    "departureMaxVelocity": 30,
+    "departureVelocityRange": [30, 90],
+    "departureDurationRange": [1.0, 1.4],
     
     "arrivalNoteNames": ["B4", "F#3", "D#4", "B3"],
     "collision1NoteNames": ["A3", "E4", "B4", "F#5", "G#5"],
     "collision2NoteNames": [""],
     "departureNoteNames": ["E3", "E4", "E2"],
     
+    "collision1AmplitudeRange": [0.2, 0.5],
+    "collision2AmplitudeRange": [0.2, 0.6],
+    
     "imageNames": [""],
+    "screenDivisorRange": [3.5, 4.5],
+    "physicsRadiusMultiplier": 0.85,
+    "velocityXRange": [-20.0, 20.0],
+    "velocityYRange": [-20.0, 20.0],
     
     "tempo": 37.0,
     
-    "minBubbleCount": 4,
-    "maxBubbleCount": 10,
-    
-    "minBubbleAge": 12,
-    "maxBubbleAge": 30
+    "bubbleCountRange": [4, 10],
+    "bubbleAgeRange": [12, 30]
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 
 /// Used to load .bpscore files
@@ -16,15 +17,17 @@ struct BubblePondScore: Codable {
     
     let arrivalSynthProperties: FMSynthProperties
     let arrivalEnvelope: AmplitudeEnvelope
-    let arrivalMinVelocity: Int
-    let arrivalMaxVelocity: Int
+    let arrivalVelocityRange: ClosedRange<Int>
+    let arrivalDurationRange: ClosedRange<Double>
+    
+    // TODO: any configuration for collision sounds
+    let collision1AmplitudeRange: ClosedRange<Double>
+    let collision2AmplitudeRange: ClosedRange<Double>
     
     let departureSynthProperties: FMSynthProperties
     let departureEnvelope: AmplitudeEnvelope
-    let departureMinVelocity: Int
-    let departureMaxVelocity: Int
-    
-    // TODO: any configuration for collision sounds
+    let departureVelocityRange: ClosedRange<Int>
+    let departureDurationRange: ClosedRange<Double>
     
     // different pitch set for each audio event type
     
@@ -36,33 +39,62 @@ struct BubblePondScore: Codable {
     // TODO: ground hum params
     
     let imageNames: [String]
+    let screenDivisorRange: ClosedRange<Float>
+    let physicsRadiusMultiplier: Float
+    let velocityXRange: ClosedRange<Float>
+    let velocityYRange: ClosedRange<Float>
     
-    // in beats per minute
+    /// Defined in beats per minute.
     let tempo: Float
     
-    let minBubbleCount: Int
-    let maxBubbleCount: Int
+    let bubbleCountRange: ClosedRange<Int>
     
-    // in seconds
-    let minBubbleAge: Int
-    let maxBubbleAge: Int
+    let bubbleAgeRange: ClosedRange<Int>
     
     
-    // MARK: - Randomness Convenience Methods
+    // MARK: - Random Behavior Methods
     
+    // In seconds.
     func randomLifeDuration() -> Int {
-        return Int.random(in: minBubbleAge...maxBubbleAge)
+        return Int.random(in: bubbleAgeRange)
     }
     
+    func randomInitialVelocity() -> CGVector {
+        
+        let dx = Float.random(in: velocityXRange)
+        let dy = Float.random(in: velocityYRange)
+        
+        return CGVector(dx: CGFloat(dx), dy: CGFloat(dy))
+    }
+    
+    
+    // MARK: - Random Audio Methods
+    
     func randomArrivalVelocity() -> UInt8 {
-        return UInt8(Int.random(in: arrivalMinVelocity...arrivalMaxVelocity))
+        return UInt8(Int.random(in: arrivalVelocityRange))
+    }
+    
+    func randomArrivalDuration() -> TimeInterval {
+        return Double.random(in: arrivalDurationRange)
     }
     
     func randomDepartureVelocity() -> UInt8 {
-        return UInt8(Int.random(in: departureMinVelocity...departureMaxVelocity))
+        return UInt8(Int.random(in: departureVelocityRange))
+    }
+    
+    func randomDepartureDuration() -> TimeInterval {
+        return Double.random(in: departureDurationRange)
     }
     
     func randomCollisionNoteName() -> String {
         return collision1NoteNames.randomElement() ?? "C4"
+    }
+    
+    func randomCollision1Amplitude() -> Double {
+        return Double.random(in: collision1AmplitudeRange)
+    }
+    
+    func randomCollision2Amplitude() -> Double {
+        return Double.random(in: collision2AmplitudeRange)
     }
 }

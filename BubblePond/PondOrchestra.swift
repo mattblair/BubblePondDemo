@@ -159,7 +159,7 @@ class PondOrchestra {
     
     func playFM(synth: AKFMOscillatorBank, noteName: String, velocity: MIDIVelocity, duration: TimeInterval) {
         
-        // Temporary fix for conversion from uppercase notenames
+        // Temporary fix for conversion from uppercase notenames via Pitch
         let pitch = Pitch(stringLiteral: noteName.lowercased())
         print("Pitch is \(pitch)")
         let noteNumber = MIDINoteNumber(pitch.rawValue)
@@ -176,11 +176,10 @@ class PondOrchestra {
     
     func playNextArrivalNote() {
         
-        //playFadeIn(note: nextArrivalNoteName())
         playFM(synth: arrivalFM,
                noteName: nextArrivalNoteName(),
                velocity: score.randomArrivalVelocity(),
-               duration: 1.0)
+               duration: score.randomArrivalDuration())
     }
     
     func playCollisionBetween(note1: String, note2: String) {
@@ -190,12 +189,13 @@ class PondOrchestra {
         let note2Number = MIDINoteNumber(Pitch(stringLiteral: note2.lowercased()).rawValue)
         
         collisionBells.trigger(frequency: note1Number.midiNoteToFrequency(),
-                               amplitude: Double.random(in: 0.2...0.6))
+                               amplitude: score.randomCollision1Amplitude())
         
+        // TODO: or play same note on both instruments?
         if note1Number != note2Number {
             
             collisionRhodes.trigger(frequency: note2Number.midiNoteToFrequency(),
-                                    amplitude: Double.random(in: 0.2...0.6))
+                                    amplitude: score.randomCollision2Amplitude())
         }
     }
     
@@ -227,6 +227,6 @@ class PondOrchestra {
         playFM(synth: departureFM,
                noteName: nextDepartureNoteName(),
                velocity: score.randomDepartureVelocity(),
-               duration: 1.2)
+               duration: score.randomDepartureDuration())
     }
 }
