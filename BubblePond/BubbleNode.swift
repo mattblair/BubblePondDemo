@@ -19,7 +19,10 @@ class BubbleNode: SKSpriteNode {
     
     static let noteNameKey: String = "NoteNameKey"
     
-    let noteName: String
+    // DEPRECATED?
+    //let noteName: String
+    let collision1NoteName: String
+    let collision2NoteName: String
     
     // have this vary over time and determine alpha/amplitude?
     var vitality: Float = 0.0
@@ -33,11 +36,13 @@ class BubbleNode: SKSpriteNode {
     // duration before fade
     
     
-    init(noteName note: String, diameter: CGFloat, duration: Int) {
+    init(note1: String, note2: String, diameter: CGFloat, duration: Int) {
         
         print("Adding node which will last \(duration) seconds")
         
-        noteName = note
+        //noteName = note
+        collision1NoteName = note1
+        collision2NoteName = note2
         lifeDuration = duration
         
         // TODO: Read these from the score, or add as init parameter
@@ -51,7 +56,8 @@ class BubbleNode: SKSpriteNode {
         // have to call this b/c it's the designated init, but color isn't used.
         super.init(texture: texture, color: .white, size: dotSize)
         
-        name = note
+        // TODO: Is this used for anything? Debugging?
+        name = "\(collision1NoteName)-\(collision2NoteName)"
         
         // TODO: separate method for configuring physics body? here? or in scene?
         // Does the physicBody have to be added to a scene before config?

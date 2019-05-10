@@ -86,8 +86,12 @@ struct BubblePondScore: Codable {
         return Double.random(in: departureDurationRange)
     }
     
-    func randomCollisionNoteName() -> String {
+    func randomCollision1NoteName() -> String {
         return collision1NoteNames.randomElement() ?? "C4"
+    }
+    
+    func randomCollision2NoteName() -> String {
+        return collision2NoteNames.randomElement() ?? "C4"
     }
     
     func randomCollision1Amplitude() -> Double {

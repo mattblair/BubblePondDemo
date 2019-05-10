@@ -123,13 +123,15 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - SKPhysicsContactDelegate methods
     
     func didBegin(_ contact: SKPhysicsContact) {
+        
+        // Note: the order of these is arbitrary
         guard let bubble1 = contact.bodyA.node as? BubbleNode else { return }
         guard let bubble2 = contact.bodyB.node as? BubbleNode else { return }
         
-        print("\(bubble1.noteName) hit \(bubble2.noteName)")
+        print("\(bubble1.collision1NoteName) hit \(bubble2.collision2NoteName)")
         
-        orchestra.playCollisionBetween(note1: bubble1.noteName,
-                                       note2: bubble2.noteName)
+        orchestra.playCollisionBetween(note1: bubble1.collision1NoteName,
+                                       note2: bubble2.collision2NoteName)
     }
     
     
@@ -309,7 +311,8 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         
         guard shouldAddBubble() else { return }
         
-        let bubble = BubbleNode(noteName: score.randomCollisionNoteName(),
+        let bubble = BubbleNode(note1: score.randomCollision1NoteName(),
+                                note2: score.randomCollision2NoteName(),
                                 diameter: bubbleDiameter(factor: randomScreenFraction()),
                                 duration: score.randomLifeDuration())
         bubble.position = point

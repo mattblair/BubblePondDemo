@@ -191,12 +191,18 @@ class PondOrchestra {
         collisionBells.trigger(frequency: note1Number.midiNoteToFrequency(),
                                amplitude: score.randomCollision1Amplitude())
         
+        /*
         // TODO: or play same note on both instruments?
         if note1Number != note2Number {
             
             collisionRhodes.trigger(frequency: note2Number.midiNoteToFrequency(),
                                     amplitude: score.randomCollision2Amplitude())
         }
+        */
+        
+        // Always play the second note:
+        collisionRhodes.trigger(frequency: note2Number.midiNoteToFrequency(),
+                                amplitude: score.randomCollision2Amplitude())
     }
     
     func nextDepartureNoteName() -> String {
