@@ -178,12 +178,6 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
     
     // MARK: - Adding New Bubbles
     
-    // TODO: derive from score
-    /*
-    func screenFactor() -> ClosedRange<Float> {
-        return 3.0...4.0
-    }
-    */
     func randomScreenFraction() -> CGFloat {
         
         return CGFloat(Float.random(in: score.screenDivisorRange))
@@ -325,14 +319,6 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         let physicsRadius = bubble.physicsRadius(multiplier: score.physicsRadiusMultiplier)
         bubble.physicsBody = SKPhysicsBody(circleOfRadius: physicsRadius)
         
-        /*
-        let dx = Float.random(in: -20.0...20.0)
-        let dy = Float.random(in: -20.0...20.0)
-        print("Initial vector: \(dx), \(dy)")
-        
-        bubble.physicsBody?.velocity = CGVector(dx: CGFloat(dx),
-                                                dy: CGFloat(dy))
-        */
         bubble.physicsBody?.velocity = score.randomInitialVelocity()
         
         print("Bubble density: \(bubble.physicsBody?.density ?? 0.0)")

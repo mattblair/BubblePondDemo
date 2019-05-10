@@ -9,12 +9,6 @@
 import AudioKit
 import MusicTheorySwift
 
-// DEPRECATED
-enum SamplerError: Error {
-    case fileNotFound
-    case fileNotReadable
-}
-
 
 class PondOrchestra {
     
@@ -29,11 +23,6 @@ class PondOrchestra {
     
     let collisionBells = AKTubularBells()
     let collisionRhodes = AKRhodesPiano()
-    
-    // DEPRECATED?
-    var activeArrivalNotes = [MIDINoteNumber]()
-    var activeCollisionNotes = [MIDINoteNumber]()
-    var activeDepartureNotes = [MIDINoteNumber]()
     
     var mainMixer: AKMixer
     var booster: AKBooster
