@@ -1,0 +1,56 @@
+{
+    "name": "BP Score #3",
+    
+    "arrivalSynthProperties" : {
+        "carrierMultiplier": 1.0,
+        "modulatingMultiplier": 3.0,
+        "modulationIndex": 3.0,
+        "vibratoDepth": 0.1,
+        "vibratoRate": 1.3
+    },
+    "arrivalEnvelope" : {
+        "attackDuration": 0.7,
+        "decayDuration": 0.3,
+        "sustainLevel": 0.3,
+        "releaseDuration": 0.1
+    },
+    "arrivalVelocityRange": [50, 90],
+    "arrivalDurationRange": [0.9, 1.1],
+    
+    "departureSynthProperties" : {
+        "carrierMultiplier": 1.0,
+        "modulatingMultiplier": 4.0,
+        "modulationIndex": 10.0,
+        "vibratoDepth": 0.1,
+        "vibratoRate": 0.05
+    },
+    "departureEnvelope" : {
+        "attackDuration": 0.3,
+        "decayDuration": 0.5,
+        "sustainLevel": 0.3,
+        "releaseDuration": 0.5
+    },
+    "departureVelocityRange": [20, 60],
+    "departureDurationRange": [1.0, 1.4],
+    
+    "arrivalNoteNames": ["E5", "C#5", "B4", "D#5", "A4", "F#5"],
+    "collision1NoteNames": ["D1", "D2", "A2"],
+    "collision2NoteNames": ["E2", "B2", "F#2", "B3"],
+    "departureNoteNames": ["B1", "F#2", "D#2", "E2", "A1"],
+    
+    "collision1AmplitudeRange": [0.1, 0.3],
+    "collision2AmplitudeRange": [0.2, 0.6],
+    
+    "imageNames": [""],
+    "screenDivisorRange": [2.0, 2.8],
+    "physicsRadiusMultiplier": 0.9,
+    "velocityXRange": [-50.0, 50.0],
+    "velocityYRange": [-50.0, 50.0],
+    
+    "tempo": 45.0,
+    
+    "bubbleCountRange": [3, 15],
+    "bubbleAgeRange": [12, 18]
+}
+
+

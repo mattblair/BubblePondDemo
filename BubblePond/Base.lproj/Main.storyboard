@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
+    <device id="ipad11_0rounded" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,50 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BubblePond" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1194" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8NW-Wz-tzi">
+                                <rect key="frame" x="40" y="44" width="56" height="30"/>
+                                <state key="normal" title="Themes"/>
+                                <connections>
+                                    <action selector="themesButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="68P-Hh-9hi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEq-s3-G4d">
+                                <rect key="frame" x="1113" y="44" width="41" height="30"/>
+                                <state key="normal" title="Notes"/>
+                                <connections>
+                                    <action selector="notesButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xoH-DT-RoW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RlH-hE-30Q">
+                                <rect key="frame" x="1124" y="764" width="30" height="30"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eCE-f8-k1b"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8NW-Wz-tzi" secondAttribute="trailing" constant="8" id="1R0-8u-Q0M"/>
+                            <constraint firstItem="VEq-s3-G4d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="38E-eq-FRs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RlH-hE-30Q" secondAttribute="bottom" constant="20" id="Fnv-sW-F8S"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VEq-s3-G4d" secondAttribute="trailing" constant="40" id="Stl-5g-kdj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RlH-hE-30Q" secondAttribute="trailing" constant="40" id="TFc-EA-PJg"/>
+                            <constraint firstItem="8NW-Wz-tzi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="cBl-vc-nYd"/>
+                            <constraint firstItem="VEq-s3-G4d" firstAttribute="centerY" secondItem="8NW-Wz-tzi" secondAttribute="centerY" id="ciQ-3m-f80"/>
+                            <constraint firstItem="RlH-hE-30Q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="oIw-6f-Wwq"/>
+                            <constraint firstItem="8NW-Wz-tzi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="tg4-OL-zs5"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="editButton" destination="RlH-hE-30Q" id="Dd1-Xq-Y52"/>
+                        <outlet property="notesButton" destination="VEq-s3-G4d" id="0dJ-D9-60w"/>
+                        <outlet property="themesButton" destination="8NW-Wz-tzi" id="Pry-dj-ecb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

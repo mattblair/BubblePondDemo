@@ -14,10 +14,17 @@ class ViewController: UIViewController {
 
     var scene: BubblePondScene?
     
+    @IBOutlet weak var themesButton: UIButton!
+    @IBOutlet weak var notesButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // TODO: hide edit button for release builds
+        
+        // TODO: Load previously played theme, or first one from playlist
         let scoreName = "bpscore2" // "bpscore-example"
         
         scene = BubblePondScene.init(size: view.bounds.size,
@@ -54,5 +61,27 @@ class ViewController: UIViewController {
     
     deinit {
         print("PondVC deallocated")
+    }
+    
+    
+    // MARK: - Handle Button Taps
+    
+    @IBAction func themesButtonTapped(_ sender: UIButton) {
+        // TODO: modal/popover presentation of themes
+    }
+    
+    @IBAction func notesButtonTapped(_ sender: UIButton) {
+        // TODO: Full screen presentation of liner notes
+    }
+    
+    @IBAction func editButtonTapped(_ sender: UIButton) {
+        
+        let scoreEditorVC = ScoreEditorViewController(nibName: nil, bundle: nil)
+        
+        scoreEditorVC.score = scene?.score
+        scoreEditorVC.delegate = scene
+        
+        let navVC = UINavigationController(rootViewController: scoreEditorVC)
+        present(navVC, animated: true, completion: nil)
     }
 }

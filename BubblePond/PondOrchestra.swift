@@ -12,9 +12,12 @@ import MusicTheorySwift
 
 class PondOrchestra {
     
+    /// Should call configureForScore() after setting
+    ///
+    /// Note: decided against a setter here, because of timing of audio graph
+    /// changes when changing score.
     var score: BubblePondScore
     
-    // TODO: make sure these values are reset when score changes
     var arrivalNoteIndex = 0
     var departureNoteIndex = 0
     
@@ -62,7 +65,7 @@ class PondOrchestra {
         
         AudioKit.output = reverbMixer
         
-        configureFMSynths()
+        configureForScore()
         
         do {
             try AudioKit.start()
@@ -109,7 +112,16 @@ class PondOrchestra {
     
     // MARK: - Configure Sound Sources
     
-    // TODO: Call this every time the score changes
+    func configureForScore() {
+        
+        stopAllNotes()
+        
+        arrivalNoteIndex = 0
+        departureNoteIndex = 0
+        
+        configureFMSynths()
+    }
+    
     func configureFMSynths() {
         
         // all of these values default to 1.0
@@ -223,5 +235,19 @@ class PondOrchestra {
                noteName: nextDepartureNoteName(),
                velocity: score.randomDepartureVelocity(),
                duration: score.randomDepartureDuration())
+    }
+    
+    
+    // MARK: - Pause
+    
+    private func stopAllNotes() {
+        
+        for note: UInt8 in 0...127 {
+            arrivalFM.stop(noteNumber: note)
+            departureFM.stop(noteNumber: note)
+        }
+        
+        collisionBells.stop()
+        collisionRhodes.stop()
     }
 }

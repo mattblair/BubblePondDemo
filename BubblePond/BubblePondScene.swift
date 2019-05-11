@@ -20,9 +20,16 @@ enum PondError: Error {
 }
 
 
-class BubblePondScene: SKScene, SKPhysicsContactDelegate {
+class BubblePondScene: SKScene, SKPhysicsContactDelegate, ScoreEditorViewControllerDelegate {
     
-    var score: BubblePondScore
+    var score: BubblePondScore {
+        didSet {
+            let framesPerSecond: Float = 60.0
+            framesPerSoundEvent = Int((60.0 / score.tempo) * framesPerSecond)
+            print("Tempo in frames: \(framesPerSoundEvent)")
+        }
+    }
+    
     let orchestra: PondOrchestra
     
     
@@ -40,10 +47,6 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
         }
         
         super.init(size: size)
-        
-        let framesPerSecond: Float = 60.0
-        framesPerSoundEvent = Int((60.0 / score.tempo) * framesPerSecond)
-        print("Tempo in frames: \(framesPerSoundEvent)")
         
         backgroundColor = .white
         
@@ -139,14 +142,16 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
+        // TODO: show bruise at lower z-index if max reached, or too close to an existing bubble
         for touch in touches { addBubbleNodeAt(point: touch.location(in: self)) }
         
-        // TODO: detect taps on bubbles, too...
+        // TODO: detect double taps on bubbles to depart using touch.tapcount
     }
     
     
     // MARK: - Configuration
     
+    // TODO: make this a failable init of BubblePondScore?
     static func loadScore(filename: String) -> BubblePondScore? {
         
         // TODO: change score extensions to .bpscore
@@ -173,6 +178,36 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate {
             print("Couldn't find score json file: \(filename)")
         }
         return nil
+    }
+    
+    /// Fade all bubbles over the given duration, and remove from scene.
+    ///
+    /// This method will not trigger departure sounds.
+    func fadeBubbles(duration: TimeInterval) {
+        let bubbles = children.compactMap { $0 as? BubbleNode }
+        
+        for bubble in bubbles {
+            bubble.run(SKAction.sequence([SKAction.fadeOut(withDuration: duration),
+                                          SKAction.removeFromParent()]))
+        }
+    }
+    
+    // TODO: reusable by theme selector, too.
+    func adaptTo(score updatedScore: BubblePondScore) {
+        
+        fadeBubbles(duration: 0.3)
+        
+        score = updatedScore
+        orchestra.score = updatedScore
+        orchestra.configureForScore()
+    }
+    
+    
+    // MARK: - ScoreEditorViewControllerDelegate method
+    
+    func scoreEditor(_: ScoreEditorViewController, finishedWith editedScore: BubblePondScore) {
+        
+        adaptTo(score: editedScore)
     }
     
     
