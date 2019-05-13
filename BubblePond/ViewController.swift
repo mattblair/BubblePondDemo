@@ -40,7 +40,6 @@ class ViewController: UIViewController {
             
             view.showsFPS = false
             view.showsNodeCount = false
-            //view.showsPhysics = true
         }
         
         // keep the screen on
@@ -83,5 +82,89 @@ class ViewController: UIViewController {
         
         let navVC = UINavigationController(rootViewController: scoreEditorVC)
         present(navVC, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - Debugging and Soundcheck
+    
+    // swiftline:disable:next discouraged_optional_collection
+    override var keyCommands: [UIKeyCommand]? {
+        
+        // TODO: return nil for non-debug builds
+        return [
+            UIKeyCommand(input: "p",
+                         modifierFlags: [], // e.g. .command
+                         action: #selector(togglePlayPause),
+                         discoverabilityTitle: "Toggle Physics"),
+            UIKeyCommand(input: "s",
+                         modifierFlags: [],
+                         action: #selector(togglePhysics),
+                         discoverabilityTitle: "Show Stats and Physics"),
+            UIKeyCommand(input: "a",
+                         modifierFlags: [],
+                         action: #selector(requestArrivalSoundcheck),
+                         discoverabilityTitle: "Arrival Soundcheck"),
+            UIKeyCommand(input: "b",
+                         modifierFlags: [],
+                         action: #selector(requestCollisionBellsSoundcheck),
+                         discoverabilityTitle: "Bells Soundcheck"),
+            UIKeyCommand(input: "r",
+                         modifierFlags: [],
+                         action: #selector(requestCollisionRhodesSoundcheck),
+                         discoverabilityTitle: "Rhodes Soundcheck"),
+            UIKeyCommand(input: "d",
+                         modifierFlags: [],
+                         action: #selector(requestDepartureSoundcheck),
+                         discoverabilityTitle: "Departure Soundcheck")
+        ]
+    }
+    
+    @objc
+    func togglePlayPause() {
+        scene?.isPaused.toggle()
+    }
+    
+    @objc
+    func togglePhysics() {
+        
+        if let skv = view as? SKView {
+            skv.showsPhysics.toggle()
+            skv.showsFPS = skv.showsPhysics
+            skv.showsDrawCount = skv.showsPhysics
+            skv.showsNodeCount = skv.showsPhysics
+        }
+    }
+    
+    func postSoundcheckNotification(source: SoundcheckAudioSource) {
+        
+        let userInfo: [String: SoundcheckAudioSource] = [ SoundcheckAudioSource.sourceKey: source ]
+        
+        NotificationCenter.default.post(name: .SoundcheckRequested,
+                                        object: self,
+                                        userInfo: userInfo)
+        
+        scene?.isPaused = true
+        
+        // TODO: observe notification to restart? or manually restart using 'p' key.
+    }
+    
+    @objc
+    func requestArrivalSoundcheck() {
+        postSoundcheckNotification(source: .arrival)
+    }
+    
+    @objc
+    func requestCollisionBellsSoundcheck() {
+        postSoundcheckNotification(source: .collisionBells)
+    }
+    
+    @objc
+    func requestCollisionRhodesSoundcheck() {
+        postSoundcheckNotification(source: .collisionRhodes)
+    }
+    
+    @objc
+    func requestDepartureSoundcheck() {
+        postSoundcheckNotification(source: .departure)
     }
 }

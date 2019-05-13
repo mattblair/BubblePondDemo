@@ -10,6 +10,19 @@ import AudioKit
 import MusicTheorySwift
 
 
+public extension Notification.Name {
+    
+    static let SoundcheckRequested = NSNotification.Name("SoundcheckRequested")
+}
+
+enum SoundcheckAudioSource: String {
+    
+    static let sourceKey: String = "sourceKey"
+    
+    case arrival, collisionBells, collisionRhodes, departure
+}
+
+
 class PondOrchestra {
     
     /// Should call configureForScore() after setting
@@ -76,6 +89,11 @@ class PondOrchestra {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleDeparture),
                                                name: .BubbleWillFade,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleSoundcheckRequest),
+                                               name: .SoundcheckRequested,
                                                object: nil)
         
         NotificationCenter.default.addObserver(self,
@@ -183,6 +201,18 @@ class PondOrchestra {
                duration: score.randomArrivalDuration())
     }
     
+    func playCollision1(note: String) {
+        let noteNumber = MIDINoteNumber(Pitch(stringLiteral: note.lowercased()).rawValue)
+        collisionBells.trigger(frequency: noteNumber.midiNoteToFrequency(),
+                               amplitude: score.randomCollision1Amplitude())
+    }
+    
+    func playCollision2(note: String) {
+        let noteNumber = MIDINoteNumber(Pitch(stringLiteral: note.lowercased()).rawValue)
+        collisionRhodes.trigger(frequency: noteNumber.midiNoteToFrequency(),
+                                amplitude: score.randomCollision2Amplitude())
+    }
+    
     func playCollisionBetween(note1: String, note2: String) {
         
         // TODO: convenience method to make this less ugly...
@@ -249,5 +279,54 @@ class PondOrchestra {
         
         collisionBells.stop()
         collisionRhodes.stop()
+    }
+    
+    
+    // MARK: - Soundcheck
+    
+    @objc
+    func handleSoundcheckRequest(note: NSNotification) {
+        
+        if let source = note.userInfo?[SoundcheckAudioSource.sourceKey] as? SoundcheckAudioSource {
+            
+            var noteNames: [String]
+            
+            switch source {
+            case .arrival:
+                noteNames = score.arrivalNoteNames
+            case .collisionBells:
+                noteNames = score.collision1NoteNames
+            case .collisionRhodes:
+                noteNames = score.collision2NoteNames
+            case .departure:
+                noteNames = score.departureNoteNames
+            }
+            
+            let interval: TimeInterval = 2.0
+            var delay: TimeInterval = 0
+            
+            for noteName in noteNames {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    
+                    switch source {
+                    case .arrival, .departure:
+                        
+                        let synth = source == .arrival ? self.arrivalFM : self.departureFM
+                        
+                        self.playFM(synth: synth,
+                               noteName: noteName,
+                               velocity: self.score.randomDepartureVelocity(),
+                               duration: self.score.randomDepartureDuration())
+                    case .collisionBells:
+                        self.playCollision1(note: noteName)
+                    case .collisionRhodes:
+                        self.playCollision2(note: noteName)
+                    }
+                }
+                
+                delay += interval
+            }
+        }
     }
 }
