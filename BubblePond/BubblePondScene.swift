@@ -20,7 +20,8 @@ enum PondError: Error {
 }
 
 
-class BubblePondScene: SKScene, SKPhysicsContactDelegate, ScoreEditorViewControllerDelegate {
+class BubblePondScene: SKScene, SKPhysicsContactDelegate,
+    ThemesViewControllerDelegate, ScoreEditorViewControllerDelegate {
     
     var score: BubblePondScore {
         didSet {
@@ -39,7 +40,8 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate, ScoreEditorViewControl
     
     init?(size: CGSize, scoreName: String) {
         
-        if let bpScore = BubblePondScene.loadScore(filename: scoreName) {
+        //if let bpScore = BubblePondScene.loadScore(filename: scoreName) {
+        if let bpScore = BubblePondScore(named: scoreName) {
             score = bpScore
             orchestra = PondOrchestra(score: bpScore)
         } else {
@@ -151,7 +153,8 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate, ScoreEditorViewControl
     
     // MARK: - Configuration
     
-    // TODO: make this a failable init of BubblePondScore?
+    // DEPRECATED: in favor of a failable init of BubblePondScore?
+    /*
     static func loadScore(filename: String) -> BubblePondScore? {
         
         // TODO: change score extensions to .bpscore
@@ -179,6 +182,7 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate, ScoreEditorViewControl
         }
         return nil
     }
+ */
     
     /// Fade all bubbles over the given duration, and remove from scene.
     ///
@@ -192,7 +196,6 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate, ScoreEditorViewControl
         }
     }
     
-    // TODO: reusable by theme selector, too.
     func adaptTo(score updatedScore: BubblePondScore) {
         
         fadeBubbles(duration: 0.3)
@@ -200,6 +203,18 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate, ScoreEditorViewControl
         score = updatedScore
         orchestra.score = updatedScore
         orchestra.configureForScore()
+    }
+    
+    
+    // MARK: - ThemesViewControllerDelegate method
+    
+    func themeViewController(_ themeVC: ThemesViewController, didSelect theme: Theme) {
+        
+        if let selectedScore = BubblePondScore(named: theme.filename) {
+            adaptTo(score: selectedScore)
+        } else {
+            print("Failed to load score from theme \(theme)")
+        }
     }
     
     

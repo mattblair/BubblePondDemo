@@ -66,7 +66,19 @@ class ViewController: UIViewController {
     // MARK: - Handle Button Taps
     
     @IBAction func themesButtonTapped(_ sender: UIButton) {
-        // TODO: modal/popover presentation of themes
+        
+        let themesVC = ThemesViewController(style: .plain)
+        
+        // TODO: customize this depending on device?
+        
+        themesVC.modalPresentationStyle = UIModalPresentationStyle.popover
+        let popover = themesVC.popoverPresentationController
+        themesVC.preferredContentSize = CGSize(width: 320.0, height: 500.0)
+        themesVC.delegate = scene
+        popover?.sourceView = sender
+        popover?.sourceRect = sender.bounds
+        
+        self.present(themesVC, animated: true)
     }
     
     @IBAction func notesButtonTapped(_ sender: UIButton) {

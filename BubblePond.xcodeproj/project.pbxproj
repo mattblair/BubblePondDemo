@@ -13,6 +13,8 @@
 		C9089B262277CD1600D0C3F0 /* bpscore2.json in Resources */ = {isa = PBXBuildFile; fileRef = C9089B252277CD1600D0C3F0 /* bpscore2.json */; };
 		C9529E53227E699100D612DC /* bpscore3.json in Resources */ = {isa = PBXBuildFile; fileRef = C9529E52227E699100D612DC /* bpscore3.json */; };
 		C98656792286234600F91C27 /* ScoreEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98656782286234600F91C27 /* ScoreEditorViewController.swift */; };
+		C986567B22874C7100F91C27 /* themelist.json in Resources */ = {isa = PBXBuildFile; fileRef = C986567A22874C7100F91C27 /* themelist.json */; };
+		C986567D22874F3600F91C27 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C986567C22874F3600F91C27 /* ThemesViewController.swift */; };
 		C98D8908226E8FE200A2E329 /* PondOrchestra.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98D8907226E8FE200A2E329 /* PondOrchestra.swift */; };
 		C9963818226A7C3900BF6454 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9963817226A7C3900BF6454 /* AppDelegate.swift */; };
 		C996381A226A7C3900BF6454 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9963819226A7C3900BF6454 /* ViewController.swift */; };
@@ -57,6 +59,8 @@
 		C9089B252277CD1600D0C3F0 /* bpscore2.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bpscore2.json; sourceTree = "<group>"; };
 		C9529E52227E699100D612DC /* bpscore3.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bpscore3.json; sourceTree = "<group>"; };
 		C98656782286234600F91C27 /* ScoreEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEditorViewController.swift; sourceTree = "<group>"; };
+		C986567A22874C7100F91C27 /* themelist.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = themelist.json; sourceTree = "<group>"; };
+		C986567C22874F3600F91C27 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
 		C98D8907226E8FE200A2E329 /* PondOrchestra.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PondOrchestra.swift; sourceTree = "<group>"; };
 		C9963814226A7C3900BF6454 /* BubblePond.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BubblePond.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9963817226A7C3900BF6454 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 				C9963817226A7C3900BF6454 /* AppDelegate.swift */,
 				C9963819226A7C3900BF6454 /* ViewController.swift */,
 				C98656782286234600F91C27 /* ScoreEditorViewController.swift */,
+				C986567C22874F3600F91C27 /* ThemesViewController.swift */,
 				C9963845226A7C9100BF6454 /* BubblePondScene.swift */,
 				C9963847226A7C9E00BF6454 /* BubbleNode.swift */,
 				C98D8907226E8FE200A2E329 /* PondOrchestra.swift */,
@@ -193,6 +198,7 @@
 		C99FA56722737B430041FB29 /* Scores */ = {
 			isa = PBXGroup;
 			children = (
+				C986567A22874C7100F91C27 /* themelist.json */,
 				C99FA56822737BA00041FB29 /* bpscore-example.json */,
 				C9089B252277CD1600D0C3F0 /* bpscore2.json */,
 				C9529E52227E699100D612DC /* bpscore3.json */,
@@ -315,6 +321,7 @@
 				C9089B262277CD1600D0C3F0 /* bpscore2.json in Resources */,
 				C9529E53227E699100D612DC /* bpscore3.json in Resources */,
 				C99FA56922737BA00041FB29 /* bpscore-example.json in Resources */,
+				C986567B22874C7100F91C27 /* themelist.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +440,7 @@
 				C98D8908226E8FE200A2E329 /* PondOrchestra.swift in Sources */,
 				C9963846226A7C9100BF6454 /* BubblePondScene.swift in Sources */,
 				C9963848226A7C9E00BF6454 /* BubbleNode.swift in Sources */,
+				C986567D22874F3600F91C27 /* ThemesViewController.swift in Sources */,
 				C98656792286234600F91C27 /* ScoreEditorViewController.swift in Sources */,
 				C99FA564227376120041FB29 /* BubblePondScore.swift in Sources */,
 				C996381A226A7C3900BF6454 /* ViewController.swift in Sources */,
