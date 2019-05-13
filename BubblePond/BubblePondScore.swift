@@ -102,3 +102,35 @@ struct BubblePondScore: Codable {
         return Double.random(in: collision2AmplitudeRange)
     }
 }
+
+extension BubblePondScore {
+    
+    /// Attempts to initialize a score from a file in the app's bundle.
+    init?(named filename: String) {
+        
+        // TODO: change score extensions to .bpscore
+        if let scorePath = Bundle.main.path(forResource: filename,
+                                            ofType: "json") {
+            
+            do {
+                let scoreJSONString = try String(contentsOfFile: scorePath)
+                if let jsonData = scoreJSONString.data(using: .utf8) {
+                    let decoder = JSONDecoder()
+                    
+                    self = try decoder.decode(BubblePondScore.self,
+                                              from: jsonData)
+                } else {
+                    print("Failed to convert scoreJSONString to data.")
+                    return nil
+                }
+            } catch {
+                print("Failed to parse \(filename): \(error)")
+                return nil
+            }
+            
+        } else {
+            print("Couldn't find score json file: \(filename)")
+            return nil
+        }
+    }
+}
