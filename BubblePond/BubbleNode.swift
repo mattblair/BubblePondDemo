@@ -58,6 +58,7 @@ class BubbleNode: SKSpriteNode {
         
         // TODO: Is this used for anything? Debugging?
         name = "\(collision1NoteName)-\(collision2NoteName)"
+        alpha = 0.0
         
         // TODO: separate method for configuring physics body? here? or in scene?
         // Does the physicBody have to be added to a scene before config?
@@ -70,14 +71,35 @@ class BubbleNode: SKSpriteNode {
     
     // MARK: - Physics
     
-    // TODO: configures physics internally?
-    
     func physicsRadius(multiplier: Float) -> CGFloat {
         return max(frame.size.width / 2, frame.size.height / 2) * CGFloat(multiplier)
     }
     
+    func configurePhysics(score: BubblePondScore) {
+        
+        let radius = physicsRadius(multiplier: score.physicsRadiusMultiplier)
+        physicsBody = SKPhysicsBody(circleOfRadius: radius)
+        
+        physicsBody?.velocity = score.randomInitialVelocity()
+        
+        print("Bubble density: \(physicsBody?.density ?? 0.0)")
+        print("Bubble default mass: \(physicsBody?.mass ?? 0.0)")
+        
+        physicsBody?.mass = 0.2
+        physicsBody?.linearDamping = 0.05
+        
+        physicsBody?.categoryBitMask = PhysicsBodyTypes.bubble.rawValue
+        physicsBody?.categoryBitMask = PhysicsBodyTypes.bubble.rawValue | PhysicsBodyTypes.edge.rawValue
+        physicsBody?.contactTestBitMask = PhysicsBodyTypes.bubble.rawValue | PhysicsBodyTypes.edge.rawValue
+    }
+    
     
     // MARK: - Lifecycle
+    
+    func arrive() {
+        // Have this call configurePhysics?
+        run(SKAction.fadeIn(withDuration: 2.0))
+    }
     
     func age(by duration: Int = 1) {
         
@@ -91,6 +113,9 @@ class BubbleNode: SKSpriteNode {
     }
     
     private func departTheScene() {
+        
+        // This may save a slight amount of energy...
+        physicsBody = nil
         
         run(SKAction.sequence([SKAction.fadeOut(withDuration: 2.0),
                                SKAction.removeFromParent()]))

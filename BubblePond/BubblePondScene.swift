@@ -355,33 +355,18 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate,
         
         guard shouldAddBubble() else { return }
         
+        // TODO: Or just pass the score into the node?
         let bubble = BubbleNode(note1: score.randomCollision1NoteName(),
                                 note2: score.randomCollision2NoteName(),
                                 diameter: bubbleDiameter(factor: randomScreenFraction()),
                                 duration: score.randomLifeDuration())
         bubble.position = point
-        bubble.alpha = 0.0 // move inside BubbleNode if it handles its own fade
         
         self.addChild(bubble)
         
-        // TODO: Did you do physics here because it has to be part of a scene first?
+        bubble.configurePhysics(score: score)
         
-        let physicsRadius = bubble.physicsRadius(multiplier: score.physicsRadiusMultiplier)
-        bubble.physicsBody = SKPhysicsBody(circleOfRadius: physicsRadius)
-        
-        bubble.physicsBody?.velocity = score.randomInitialVelocity()
-        
-        print("Bubble density: \(bubble.physicsBody?.density ?? 0.0)")
-        print("Bubble default mass: \(bubble.physicsBody?.mass ?? 0.0)")
-        
-        bubble.physicsBody?.mass = 0.2
-        
-        bubble.physicsBody?.categoryBitMask = PhysicsBodyTypes.bubble.rawValue
-        bubble.physicsBody?.categoryBitMask = PhysicsBodyTypes.bubble.rawValue | PhysicsBodyTypes.edge.rawValue
-        bubble.physicsBody?.contactTestBitMask = PhysicsBodyTypes.bubble.rawValue | PhysicsBodyTypes.edge.rawValue
-        
-        // TODO: Or have it fade itself in?
-        bubble.run(SKAction.fadeIn(withDuration: 2.0))
+        bubble.arrive()
         
         orchestra.playNextArrivalNote()
     }
