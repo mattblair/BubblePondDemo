@@ -52,6 +52,9 @@ struct BubblePondScore: Codable {
     let bubbleAgeRange: ClosedRange<Int>
     
     
+    /// For UserDefaults persistence
+    static let lastScoreKey = "lastScoreKey"
+    
     // MARK: - Random Behavior Methods
     
     // In seconds.

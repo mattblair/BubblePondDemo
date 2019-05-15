@@ -25,7 +25,8 @@ class ViewController: UIViewController {
         // TODO: hide edit button for release builds
         
         // TODO: Load previously played theme, or first one from playlist
-        let scoreName = "bpscore2" // "bpscore-example"
+        
+        let scoreName = UserDefaults.standard.string(forKey: BubblePondScore.lastScoreKey) ?? "bpscore2"
         
         scene = BubblePondScene.init(size: view.bounds.size,
                                      scoreName: scoreName)

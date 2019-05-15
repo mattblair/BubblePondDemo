@@ -211,6 +211,9 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate,
     func themeViewController(_ themeVC: ThemesViewController, didSelect theme: Theme) {
         
         if let selectedScore = BubblePondScore(named: theme.filename) {
+            
+            UserDefaults.standard.set(theme.filename,
+                                      forKey: BubblePondScore.lastScoreKey)
             adaptTo(score: selectedScore)
         } else {
             print("Failed to load score from theme \(theme)")
