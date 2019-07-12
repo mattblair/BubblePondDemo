@@ -51,6 +51,7 @@ struct BubblePondScore: Codable {
     
     let bubbleAgeRange: ClosedRange<Int>
     
+    let containsBubbles: Bool
     
     /// For UserDefaults persistence
     static let lastScoreKey = "lastScoreKey"

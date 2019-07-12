@@ -56,6 +56,11 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate,
         
         // TODO: try with other gravity vectors
         physicsWorld.gravity = .zero
+        
+        // TODO: avoid redundancy with 
+        if score.containsBubbles {
+            physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -200,9 +205,18 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate,
         
         fadeBubbles(duration: 0.3)
         
+        print("Adapting scene to \(updatedScore.name) score.")
+        
         score = updatedScore
         orchestra.score = updatedScore
         orchestra.configureForScore()
+        
+        // prevent bubbles from leaving the screen
+        if score.containsBubbles {
+            physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        } else {
+            physicsBody = nil
+        }
     }
     
     
