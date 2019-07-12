@@ -100,7 +100,7 @@ class ViewController: UIViewController {
     
     // MARK: - Debugging and Soundcheck
     
-    // swiftline:disable:next discouraged_optional_collection
+    // swiftlint:disable:next discouraged_optional_collection
     override var keyCommands: [UIKeyCommand]? {
         
         // TODO: return nil for non-debug builds
