@@ -36,7 +36,7 @@ class BubbleNode: SKSpriteNode {
     // duration before fade
     
     
-    init(note1: String, note2: String, diameter: CGFloat, duration: Int) {
+    init(note1: String, note2: String, imageName: String, diameter: CGFloat, duration: Int) {
         
         print("Adding node which will last \(duration) seconds")
         
@@ -46,7 +46,7 @@ class BubbleNode: SKSpriteNode {
         lifeDuration = duration
         
         // TODO: Read these from the score, or add as init parameter
-        let imageName = "sk180313-dot-\(Int.random(in: 1...7))"
+        //let imageName = "sk180313-dot-\(Int.random(in: 1...7))"
         
         // make this initializer failable based on success of this?
         let texture = SKTexture(imageNamed: imageName)

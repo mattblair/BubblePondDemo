@@ -372,9 +372,14 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate,
         
         guard shouldAddBubble() else { return }
         
+        guard let imageName = score.randomNodeImageName() else { return }
+        
+        // TODO: validate image availability here?
+        
         // TODO: Or just pass the score into the node?
         let bubble = BubbleNode(note1: score.randomCollision1NoteName(),
                                 note2: score.randomCollision2NoteName(),
+                                imageName: imageName,
                                 diameter: bubbleDiameter(factor: randomScreenFraction()),
                                 duration: score.randomLifeDuration())
         bubble.position = point

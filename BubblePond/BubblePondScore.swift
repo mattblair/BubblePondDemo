@@ -58,6 +58,21 @@ struct BubblePondScore: Codable {
     /// For UserDefaults persistence
     static let lastScoreKey = "lastScoreKey"
     
+    
+    // MARK: - Image Resources
+    
+    func randomNodeImageName() -> String? {
+        
+        //let imageName = "sk180313-dot-\(Int.random(in: 1...7))"
+        return bubbleImageNames.randomElement()
+    }
+    
+    func randomBackgroundImageName() -> String? {
+        
+        return backgroundImageNames.randomElement()
+    }
+    
+    
     // MARK: - Random Behavior Methods
     
     // In seconds.
