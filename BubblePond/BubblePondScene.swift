@@ -25,15 +25,13 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate,
     
     var score: BubblePondScore {
         didSet {
-            let framesPerSecond: Float = 60.0
-            framesPerSoundEvent = Int((60.0 / score.tempo) * framesPerSecond)
-            print("Tempo in frames: \(framesPerSoundEvent)")
+            updateFramesPerEventFor(tempo: score.tempo)
         }
     }
     
     let orchestra: PondOrchestra
     
-    
+    private let framesPerSecond: Float = 60.0
     private var frameCount = 0
     private var framesPerSoundEvent = 60
     
@@ -57,7 +55,9 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate,
         // TODO: try with other gravity vectors
         physicsWorld.gravity = .zero
         
-        // TODO: avoid redundancy with 
+        // set initial tempo directly, because property observer isn't triggered before super.init()
+        updateFramesPerEventFor(tempo: score.tempo)
+        
         if score.containsBubbles {
             physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         }
@@ -188,6 +188,11 @@ class BubblePondScene: SKScene, SKPhysicsContactDelegate,
         return nil
     }
  */
+    
+    func updateFramesPerEventFor(tempo: Float) {
+        framesPerSoundEvent = Int((60.0 / tempo) * framesPerSecond)
+        print("Tempo in frames: \(framesPerSoundEvent)")
+    }
     
     /// Fade all bubbles over the given duration, and remove from scene.
     ///
