@@ -38,7 +38,9 @@ struct BubblePondScore: Codable {
     
     // TODO: ground hum params
     
-    let imageNames: [String]
+    let bubbleImageNames: [String]
+    let backgroundImageNames: [String]
+    let backgroundDensity: Float
     let screenDivisorRange: ClosedRange<Float>
     let physicsRadiusMultiplier: Float
     let velocityXRange: ClosedRange<Float>

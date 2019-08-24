@@ -1,5 +1,5 @@
 {
-    "name": "BP Score #3",
+    "name": "BP Score #3a",
     
     "arrivalSynthProperties" : {
         "carrierMultiplier": 1.0,
@@ -33,10 +33,10 @@
     "departureVelocityRange": [20, 60],
     "departureDurationRange": [1.0, 1.4],
     
-    "arrivalNoteNames": ["E5", "C#5", "B4", "D#5", "A4", "F#5"],
+    "arrivalNoteNames": ["E3", "C#3", "B2", "D#3", "A2", "F#3"],
     "collision1NoteNames": ["D1", "D2", "A2"],
     "collision2NoteNames": ["E2", "B2", "F#2", "B3"],
-    "departureNoteNames": ["B1", "F#2", "D#2", "E2", "A1"],
+    "departureNoteNames": ["B3", "F#3", "D#4", "E4", "A3"],
     
     "collision1AmplitudeRange": [0.1, 0.3],
     "collision2AmplitudeRange": [0.2, 0.6],

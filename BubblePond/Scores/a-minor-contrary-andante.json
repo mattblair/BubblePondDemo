@@ -1,5 +1,5 @@
 {
-    "name": "a minor test",
+    "name": "Contrarian (Andante)",
     
     "arrivalSynthProperties" : {
         "carrierMultiplier": 2.0,
@@ -49,10 +49,11 @@
     "velocityXRange": [-30.0, 30.0],
     "velocityYRange": [-30.0, 30.0],
     
-    "tempo": 11.0,
+    "tempo": 59.0,
     
     "bubbleCountRange": [3, 15],
     "bubbleAgeRange": [12, 30],
     "containsBubbles": false
 }
+
 

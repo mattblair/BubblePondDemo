@@ -41,7 +41,9 @@
     "collision1AmplitudeRange": [0.1, 0.3],
     "collision2AmplitudeRange": [0.3, 0.6],
     
-    "imageNames": [""],
+    "bubbleImageNames": ["sk180313-dot-1", "sk180313-dot-2", "sk180313-dot-3", "sk180313-dot-4", "sk180313-dot-5", "sk180313-dot-6", "sk180313-dot-7"],
+    "backgroundImageNames": [""],
+    "backgroundDensity": 0.5,
     "screenDivisorRange": [2.5, 3.5],
     "physicsRadiusMultiplier": 0.85,
     "velocityXRange": [-50.0, 20.0],
@@ -50,6 +52,7 @@
     "tempo": 32.0,
     
     "bubbleCountRange": [3, 10],
-    "bubbleAgeRange": [12, 30]
+    "bubbleAgeRange": [12, 30],
+    "containsBubbles": true
 }
 

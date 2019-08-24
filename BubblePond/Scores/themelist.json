@@ -10,9 +10,29 @@
         "filename": "bpscore2"
     },
     {
-        "title": "#3",
+        "title": "#3a",
         "notes": "",
-        "filename": "bpscore3"
+        "filename": "bpscore3a"
+    },
+    {
+        "title": "#4",
+        "notes": "",
+        "filename": "bpscore4"
+    },
+    {
+        "title": "slow",
+        "notes": "significantly slower than the other scores",
+        "filename": "bpscore-slow"
+    },
+    {
+        "title": "a minor test",
+        "notes": "",
+        "filename": "a-minor-contrary"
+    },
+    {
+        "title": "Contrarian (Andante)",
+        "notes": "",
+        "filename": "a-minor-contrary-andante"
     }
 ]
 

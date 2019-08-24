@@ -1,18 +1,18 @@
 {
-    "name": "#4",
+    "name": "Slow",
     
     "arrivalSynthProperties" : {
         "carrierMultiplier": 2.0,
-        "modulatingMultiplier": 1.0,
-        "modulationIndex": 1.0,
-        "vibratoDepth": 0.0,
-        "vibratoRate": 0.0
+        "modulatingMultiplier": 1.5,
+        "modulationIndex": 5.0,
+        "vibratoDepth": 0.3,
+        "vibratoRate": 0.5
     },
     "arrivalEnvelope" : {
-        "attackDuration": 0.7,
-        "decayDuration": 0.3,
+        "attackDuration": 1.0,
+        "decayDuration": 0.5,
         "sustainLevel": 0.3,
-        "releaseDuration": 0.1
+        "releaseDuration": 0.5
     },
     "arrivalVelocityRange": [50, 110],
     "arrivalDurationRange": [0.9, 1.1],
@@ -20,9 +20,9 @@
     "departureSynthProperties" : {
         "carrierMultiplier": 1.0,
         "modulatingMultiplier": 1.0,
-        "modulationIndex": 1.0,
-        "vibratoDepth": 0.0,
-        "vibratoRate": 0.0
+        "modulationIndex": 4.0,
+        "vibratoDepth": 0.3,
+        "vibratoRate": 0.6
     },
     "departureEnvelope" : {
         "attackDuration": 0.3,
@@ -33,10 +33,10 @@
     "departureVelocityRange": [30, 90],
     "departureDurationRange": [1.0, 1.4],
     
-    "arrivalNoteNames": ["B4", "F#4", "D4", "C3"],
-    "collision1NoteNames": ["A3", "E4", "B4", "F#5", "G#5"],
-    "collision2NoteNames": ["D1", "C1", "E2", "G#2"],
-    "departureNoteNames": ["E3", "F#3", "B3", "E4", "E2"],
+    "arrivalNoteNames": ["B3", "F#4", "D4", "C#3", "A4", "E4"],
+    "collision1NoteNames": ["A3", "E4", "B4", "F#5", "A5"],
+    "collision2NoteNames": ["D1", "C#1", "E2", "F#2"],
+    "departureNoteNames": ["D1", "F#2", "B1", "E2", "A1"],
     
     "collision1AmplitudeRange": [0.2, 0.5],
     "collision2AmplitudeRange": [0.2, 0.6],
@@ -46,12 +46,12 @@
     "backgroundDensity": 0.5,
     "screenDivisorRange": [4.0, 5.0],
     "physicsRadiusMultiplier": 0.9,
-    "velocityXRange": [-100.0, 100.0],
-    "velocityYRange": [-100.0, 100.0],
+    "velocityXRange": [-10.0, 20.0],
+    "velocityYRange": [-20.0, 10.0],
     
-    "tempo": 23.0,
+    "tempo": 5.0,
     
-    "bubbleCountRange": [3, 15],
-    "bubbleAgeRange": [8, 10],
+    "bubbleCountRange": [3, 8],
+    "bubbleAgeRange": [15, 25],
     "containsBubbles": true
 }

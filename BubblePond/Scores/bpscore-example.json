@@ -35,20 +35,23 @@
     
     "arrivalNoteNames": ["B4", "F#3", "D#4", "B3"],
     "collision1NoteNames": ["A3", "E4", "B4", "F#5", "G#5"],
-    "collision2NoteNames": [""],
+    "collision2NoteNames": [],
     "departureNoteNames": ["E3", "E4", "E2"],
     
     "collision1AmplitudeRange": [0.2, 0.5],
     "collision2AmplitudeRange": [0.2, 0.6],
     
-    "imageNames": [""],
+    "bubbleImageNames": ["sk180313-dot-1", "sk180313-dot-2", "sk180313-dot-3", "sk180313-dot-4", "sk180313-dot-5", "sk180313-dot-6", "sk180313-dot-7"],
+    "backgroundImageNames": [""],
+    "backgroundDensity": 0.5,
     "screenDivisorRange": [3.5, 4.5],
     "physicsRadiusMultiplier": 0.85,
     "velocityXRange": [-20.0, 20.0],
     "velocityYRange": [-20.0, 20.0],
     
-    "tempo": 37.0,
+    "tempo": 60.0,
     
     "bubbleCountRange": [4, 10],
-    "bubbleAgeRange": [12, 30]
+    "bubbleAgeRange": [12, 30],
+    "containsBubbles": true
 }
